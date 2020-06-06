@@ -1,16 +1,19 @@
+#include "Matrix.hpp"
 #include <iostream>
 using namespace std;
 
-void cHar(char a[]){
-    for(int x=0;x<(int)sizeof a;x++){
-        a[x]=2*x;
-        cout<<(int)a[x]<<endl;
-    }
-}
-
 int main(){
-    char a[6]={0};     //variable
+    Matrix mat1(2,2),mat2(2,2);
+    CalcMatrix proto;
     
-    cout<<(int)sizeof a<<endl;
-    cHar(a);
+    mat1.mtrx[0]=1;
+    mat1.mtrx[1]=0;
+    mat1.mtrx[2]=0;
+    mat1.mtrx[3]=1;
+    mat2.mtrx[0]=1;
+    mat2.mtrx[1]=0;
+    mat2.mtrx[2]=0;
+    mat2.mtrx[3]=1;
+    
+    cout<<proto.calc(&mat1,&mat2)<<endl;
 }
