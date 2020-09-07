@@ -1,19 +1,34 @@
-#include "Matrix.hpp"
 #include <iostream>
+#include <string>
+#include <iomanip>
+#include "tsk.hpp"
 using namespace std;
 
+typedef Tree<string> NameTree;
+typedef NameTree::Node Node;
+typedef NameTree::Children Children;
+typedef NameTree::CIterator CIterator;
+
+void shw(const Node* node, int depth=0){
+    cout<<setw(depth*2)<<" "<<node->value<<endl;
+    
+    const Children& children=node->children;
+    for(CIterator it=children.begin();it!=children.end();++it){
+        shw(*it, depth+1);
+    }
+}
+
 int main(){
-    Matrix mat1(2,2),mat2(2,2);
-    CalcMatrix proto;
+    NameTree tree("hoge");
+    Node* hoge=tree.GetRoot();
     
-    mat1.mtrx[0]=1;
-    mat1.mtrx[1]=0;
-    mat1.mtrx[2]=0;
-    mat1.mtrx[3]=1;
-    mat2.mtrx[0]=1;
-    mat2.mtrx[1]=0;
-    mat2.mtrx[2]=0;
-    mat2.mtrx[3]=1;
+    Node* foo=NameTree::Append(hoge, "foo");
+    Node* bar=NameTree::Append(hoge, "bar");
+    NameTree::Append(hoge, "readme.txt");
+    NameTree::Append(foo, "foo.h");
+    NameTree::Append(foo, "foo.cpp");
+    NameTree::Append(bar, "bar.h");
+    NameTree::Append(bar, "bar.cpp");
     
-    cout<<proto.calc(&mat1,&mat2)<<endl;
+    shw(hoge);
 }
